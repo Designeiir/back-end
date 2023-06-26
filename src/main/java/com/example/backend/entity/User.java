@@ -9,9 +9,12 @@ import lombok.Data;
 public class User {
 
     @TableId(type = IdType.AUTO)
-    private int id;
+    private int uid;
     private String name;
+    private int sex;
     private int age;
-    private String gender;
-    private String email;
+    private String phoneNumber;
+    private String introduction;
+    private String img;
+    private int type;
 }
