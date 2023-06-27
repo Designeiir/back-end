@@ -17,6 +17,9 @@ spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
 
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
@@ -28,3 +31,9 @@ mybatis-plus:
       db-type: MYSQL
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+jwt:
+  header: "Authorization" #token返回头部
+  tokenPrefix: "Bearer " #token前缀
+  secret: "qwertyuiop7418520" #密钥
+  expireTime: 24 #token有效时间 (分钟) 建议一小时以上
