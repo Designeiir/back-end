@@ -20,7 +20,7 @@ public class ExcelTestController {
         List<String> data = Arrays.asList("数据1", "数据2", "数据3");
 
         try {
-            String filePath = "E:\\desktop\\test\\excel\\test.excel"; // 指定Excel文件的保存路径
+            String filePath = "E:\\desktop\\test\\excel\\test.xlsx"; // 指定Excel文件的保存路径
            ExcelUtils.createExcel(data, filePath);
             return filePath;
         } catch (IOException e) {
