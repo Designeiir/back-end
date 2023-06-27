@@ -12,7 +12,7 @@ spring:
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/online_study?serverTimezone=GMT%2B8&useSSL=FALSE&allowPublicKeyRetrieval=true
     username: root
-    password: 123456
+    password: 52118259541xx
     type: com.alibaba.druid.pool.DruidDataSource
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
@@ -37,3 +37,8 @@ jwt:
   tokenPrefix: "Bearer " #token前缀
   secret: "qwertyuiop7418520" #密钥
   expireTime: 24 #token有效时间 (分钟) 建议一小时以上
+
+file:
+  realPath: G:/Program Data/online-study/files/  # 文件在磁盘中的地址
+  url: /files/
+

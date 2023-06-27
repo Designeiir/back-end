@@ -1,6 +1,8 @@
 package com.example.backend.controller;
 
+import com.example.backend.annotation.PassToken;
 import com.example.backend.utils.ExcelUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -14,18 +16,23 @@ import java.util.List;
 @RequestMapping("/excelTest")
 public class ExcelTestController {
 
+    @Value("${file.realPath}")
+    private String realPath;
+
     @GetMapping("/download")
     @ResponseBody
+    @PassToken
     public String downloadExcel() {
-        List<String> data = Arrays.asList("Êı¾İ1", "Êı¾İ2", "Êı¾İ3");
+        List<String> data = Arrays.asList("å§“å", "å­¦ç§‘", "æˆç»©");
 
         try {
-            String filePath = "E:\\desktop\\test\\excel\\test.xlsx"; // Ö¸¶¨ExcelÎÄ¼şµÄ±£´æÂ·¾¶
-           ExcelUtils.createExcel(data, filePath);
+            // String filePath = "E:\\desktop\\test\\excel\\test.xlsx"; // Ö¸ï¿½ï¿½Excelï¿½Ä¼ï¿½ï¿½Ä±ï¿½ï¿½ï¿½Â·ï¿½ï¿½
+            String filePath = realPath + "excel/test.xlsx"; // Ö¸ï¿½ï¿½Excelï¿½Ä¼ï¿½ï¿½Ä±ï¿½ï¿½ï¿½Â·ï¿½ï¿½
+            ExcelUtils.createExcel(data, filePath);
             return filePath;
         } catch (IOException e) {
             e.printStackTrace();
-            return "Éú³ÉExcelÊ§°Ü";
+            return "ï¿½ï¿½ï¿½ï¿½ExcelÊ§ï¿½ï¿½";
         }
     }
 
