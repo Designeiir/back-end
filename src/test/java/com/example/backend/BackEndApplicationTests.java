@@ -49,4 +49,11 @@ class BackEndApplicationTests {
 
     }
 
+    @Test
+    void textTest() {
+        Course course = courseMapper.selectById(1);
+        System.out.println(course.getStartTime());
+        System.out.println(course.getDescription());
+    }
+
 }
