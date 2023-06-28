@@ -39,6 +39,6 @@ jwt:
   expireTime: 24 #token有效时间 (分钟) 建议一小时以上
 
 file:
-  realPath: G:/Program Data/online-study/files/  # 文件在磁盘中的地址
+  realPath: E:/desktop/后端/back-end/files/ # 文件在磁盘中的地址
   url: /files/
 
