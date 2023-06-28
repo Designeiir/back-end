@@ -22,7 +22,7 @@ public class UserController {
     private UserService userService;
 
     /**
-     * @author:
+     * 用户登录
      * */
     @PassToken
     @PostMapping("/login")
@@ -30,6 +30,14 @@ public class UserController {
         Map<String, Object> result = userService.login(user);
         response.setHeader(JWTUtils.USER_LOGIN_TOKEN, (String) result.get("token"));
         return ResultInfoUtils.success(result);
+    }
+
+    @PassToken
+    @PostMapping("/register")
+    public ResultInfo register(@RequestBody Map<String, Object> params) {
+        int result = userService.register(params);
+        System.out.println(result);
+        return ResultInfoUtils.success();
     }
 
     @GetMapping("/getAll")

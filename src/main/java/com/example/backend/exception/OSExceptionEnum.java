@@ -15,13 +15,19 @@ public enum OSExceptionEnum {
 
     TOKEN_VALID_ERROR(20003, "token验证失败"),
 
-    // 业务逻辑有问题的为3开头
-    USER_EMPTY(40002, "找不到用户"),
+    PARAM_ERROR(20004, "参数错误"),
 
-    PASSWORD_ERROR(40003, "密码错误"),
+    // 业务逻辑有问题的为3开头
+    USER_EMPTY(30001, "找不到用户"),
+
+    PASSWORD_ERROR(30002, "密码错误"),
+
+    USER_EXISTS(30003, "用户名已存在"),
 
     // 数据库相关错误的为4开头
     EMPTY_DATA(40001, "数据为空"),
+
+    INVITE_CODE_ERROR(40002, "邀请码错误"),
 
     ;
 
