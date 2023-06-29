@@ -26,7 +26,7 @@ public class UserController {
      * */
     @PassToken
     @PostMapping("/login")
-    public ResultInfo login(User user, HttpServletResponse response) {
+    public ResultInfo login(@RequestBody User user, HttpServletResponse response) {
         Map<String, Object> result = userService.login(user);
         int code = (int) result.get("code");
         if (code == 1) {
