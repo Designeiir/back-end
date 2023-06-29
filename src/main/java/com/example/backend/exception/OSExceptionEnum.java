@@ -6,6 +6,7 @@ import lombok.Data;
 public enum OSExceptionEnum {
 
     //文件相关的为1开头
+    FILE_NOT_FOUND(10001, "文件未找到"),
 
 
     // 前端参数错误的为2开头

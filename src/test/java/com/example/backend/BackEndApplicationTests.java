@@ -1,5 +1,9 @@
 package com.example.backend;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.backend.entity.*;
 import com.example.backend.mapper.*;
 import org.junit.jupiter.api.Test;
@@ -21,6 +25,8 @@ class BackEndApplicationTests {
     private QuestionMapper questionMapper;
     @Autowired
     private StuCourseMapper stuCourseMapper;
+    @Autowired
+    private UserMapper userMapper;
 
     @Test
     void contextLoads() {
@@ -54,6 +60,19 @@ class BackEndApplicationTests {
         Course course = courseMapper.selectById(1);
         System.out.println(course.getStartTime());
         System.out.println(course.getDescription());
+    }
+
+    @Test
+    public void selectPage(){
+        LambdaQueryWrapper<User> userLambdaQueryWrapper = Wrappers.lambdaQuery();
+        // userLambdaQueryWrapper.like(User::getUid , 1);
+
+        Page<User> userPage = new Page<>(0 , 2);
+        Page<User> userIPage = userMapper.selectPage(userPage, null);
+        // IPage<User> userIPage = userMapper.selectPage(userPage , userLambdaQueryWrapper);
+        System.out.println("总页数： "+userIPage.getPages());
+        System.out.println("总记录数： "+userIPage.getTotal());
+        userIPage.getRecords().forEach(System.out::println);
     }
 
 }
