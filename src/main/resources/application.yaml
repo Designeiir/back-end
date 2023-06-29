@@ -3,7 +3,7 @@ server:
 
 mybatis:
   config-location: classpath:mybatis.cfg.xml
-  type-aliases-package: com.example.backend.entity
+  type-aliases-package: com.example.backend.entity  # 这里改成项目实体类的包
   mapper-locations:
     - classpath:mapper/*.xml
 
@@ -25,10 +25,9 @@ mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
   global-config:
     db-config:
-      id-type: auto
+      id-type: auto  # 代表主键自增
       field-strategy: IGNORED
-      #
-      db-type: MYSQL
+      db-type: MYSQL  # 数据库
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 

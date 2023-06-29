@@ -22,26 +22,22 @@ public class UserController {
     private UserService userService;
 
     /**
-     * @author:
+     * 用户登录
      * */
     @PassToken
     @PostMapping("/login")
     public ResultInfo login(@RequestBody User user, HttpServletResponse response) {
         Map<String, Object> result = userService.login(user);
-        int code = (int) result.get("code");
-        if (code == 1) {
-            response.setHeader(JWTUtils.USER_LOGIN_TOKEN, (String) result.get("token"));
-            return ResultInfoUtils.success(result);
-        }
-        else if (code == 0) {
-            return ResultInfoUtils.error(400, "用户名为空");
-        }
-        else if (code == -1){
-            return ResultInfoUtils.error(400, "用户不存在");
-        }
-        else {
-            return ResultInfoUtils.error(400, "密码错误");
-        }
+        response.setHeader(JWTUtils.USER_LOGIN_TOKEN, (String) result.get("token"));
+        return ResultInfoUtils.success(result);
+    }
+
+    @PassToken
+    @PostMapping("/register")
+    public ResultInfo register(@RequestBody Map<String, Object> params) {
+        int result = userService.register(params);
+        System.out.println(result);
+        return ResultInfoUtils.success();
     }
 
     @GetMapping("/getAll")

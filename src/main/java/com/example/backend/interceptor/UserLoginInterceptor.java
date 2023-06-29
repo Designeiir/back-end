@@ -2,6 +2,8 @@ package com.example.backend.interceptor;
 
 import com.example.backend.annotation.PassToken;
 import com.example.backend.entity.ResultInfo;
+import com.example.backend.exception.OSException;
+import com.example.backend.exception.OSExceptionEnum;
 import com.example.backend.utils.JWTUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
@@ -42,16 +44,13 @@ public class UserLoginInterceptor implements HandlerInterceptor {
 
         //token不存在
         if (token == null || token.equals("")) {
-            System.out.println("请先登录");
-            throw new Exception("请先登录");
-            //throw new ApiException("请先登录");
+            throw new OSException(OSExceptionEnum.TOKEN_NULL);
         }
         //验证token
         String sub = JWTUtils.validateToken(token);
         if (sub == null || sub.equals("")) {
             System.out.println("token验证失败");
-            throw new Exception("token验证失败");
-            // throw new ApiException(ResultInfo.unauthorized("token验证失败"));
+            throw new OSException(OSExceptionEnum.TOKEN_VALID_ERROR);
         }
 
         //更新token有效时间 (如果需要更新其实就是产生一个新的token)
