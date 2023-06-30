@@ -26,13 +26,13 @@ public class ExcelTestController {
         List<String> data = Arrays.asList("姓名", "学科", "成绩");
 
         try {
-            // String filePath = "E:\\desktop\\test\\excel\\test.xlsx"; // ָ��Excel�ļ��ı���·��
-            String filePath = realPath + "excel/test.xlsx"; // ָ��Excel�ļ��ı���·��
+            // String filePath = "E:\\desktop\\test\\excel\\test.xlsx";
+            String filePath = realPath + "excel/test.xlsx";
             ExcelUtils.createExcel(data, filePath);
             return filePath;
         } catch (IOException e) {
             e.printStackTrace();
-            return "����Excelʧ��";
+            return "成功生成excel";
         }
     }
 
