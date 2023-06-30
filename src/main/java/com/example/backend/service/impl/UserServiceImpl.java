@@ -81,7 +81,7 @@ public class UserServiceImpl implements UserService {
                 throw new OSException(OSExceptionEnum.PARAM_ERROR);
             }
             // 判断邀请码合法性
-            if (user.getType() == 1 && !validInviteCode(inviteCode)) {
+            if (user.getType() == 2 && !validInviteCode(inviteCode)) {
                 throw new OSException(OSExceptionEnum.INVITE_CODE_ERROR);
             }
             // 判断密码合法性
