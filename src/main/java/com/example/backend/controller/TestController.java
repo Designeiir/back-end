@@ -8,12 +8,14 @@ import com.example.backend.exception.OSExceptionEnum;
 import com.example.backend.service.TestService;
 import com.example.backend.utils.ResultInfoUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/test")
+@CrossOrigin
 public class TestController {
 
     @Autowired
@@ -25,7 +27,7 @@ public class TestController {
         return "成功！";
     }
 
-    @PassToken
+
     @GetMapping("testUser")
     public User testUser(int id) {
         return testService.testUser(id);

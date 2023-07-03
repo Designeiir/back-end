@@ -75,4 +75,13 @@ class BackEndApplicationTests {
         userIPage.getRecords().forEach(System.out::println);
     }
 
+    @Test
+    void testPage() {
+        for (User user : userMapper.selectAllByPage(0, 2)) {
+            System.out.println(user);
+        }
+
+    }
+
+
 }

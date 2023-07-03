@@ -7,6 +7,11 @@ public enum OSExceptionEnum {
 
     //文件相关的为1开头
     FILE_NOT_FOUND(10001, "文件未找到"),
+    FILE_SAVE_ERROR(10001, "文件保存错误"),
+
+    FILE_UPLOAD_ERROR(10002, "文件上传错误"),
+
+    FILE_TYPE_ERROR(10003, "文件类型错误"),
 
 
     // 前端参数错误的为2开头
@@ -16,13 +21,21 @@ public enum OSExceptionEnum {
 
     TOKEN_VALID_ERROR(20003, "token验证失败"),
 
-    // 业务逻辑有问题的为3开头
-    USER_EMPTY(40002, "找不到用户"),
+    PARAM_ERROR(20004, "参数错误"),
 
-    PASSWORD_ERROR(40003, "密码错误"),
+    // 业务逻辑有问题的为3开头
+    USER_EMPTY(30001, "找不到用户"),
+
+    PASSWORD_ERROR(30002, "密码错误"),
+
+    USER_EXISTS(30003, "用户名已存在"),
 
     // 数据库相关错误的为4开头
     EMPTY_DATA(40001, "数据为空"),
+
+    INVITE_CODE_ERROR(40002, "邀请码错误"),
+
+    DATABASE_ERROR(40003, "数据库操作错误"),
 
     ;
 
