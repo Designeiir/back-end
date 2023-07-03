@@ -24,6 +24,9 @@ import java.util.List;
 public class CourseServiceImpl implements CourseService {
     @Autowired
     private CourseMapper courseMapper;
+    @Autowired
+    private UserMapper userMapper;
+
     @Override
     public List<Course> selectAllCourseServices() {
         return courseMapper.selectList(null);
@@ -37,10 +40,9 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public Page<Course> test(Page<Course> page, int id) {
-        Page<Course> course =courseMapper.test(page,id);
+        Page<Course> course = courseMapper.test(page, id);
         return course;
-    @Autowired
-    private UserMapper userMapper;
+    }
 
     @Override
     public Map<String, Object> selectCourse(int cid) {

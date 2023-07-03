@@ -1,7 +1,6 @@
 package com.example.backend;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.backend.entity.*;
@@ -83,5 +82,12 @@ class BackEndApplicationTests {
 
     }
 
+
+
+    @Test
+    public void Page() {
+
+
+    }
 
 }

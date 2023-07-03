@@ -46,6 +46,7 @@ public class UserController {
     }
 
     @GetMapping("/getAll")
+    @PassToken
     public ResultInfo getAllUsers() {
         List<User> users = userService.selectAllUsers();
         System.out.println(users);

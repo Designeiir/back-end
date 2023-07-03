@@ -45,17 +45,13 @@ public class CourseController {
     public ResultInfo test(
         @RequestParam("page") int page,
         @RequestParam("size") int size,
-        @RequestParam("id")int id){
-        Page<Course> p= new Page<>(page, size);
+        @RequestParam("id")int id) {
+        Page<Course> p = new Page<>(page, size);
         Page<Course> course = courseService.test(p, id);
 
 
         return ResultInfoUtils.success(course);
-
-
-    @Autowired
-    private CourseService courseService;
-
+    }
 
 
     @PassToken
