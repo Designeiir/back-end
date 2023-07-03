@@ -19,4 +19,5 @@ public class Course {
     private int teacher;
     private String scoreRule;
     private int status;
+    private String image;
 }

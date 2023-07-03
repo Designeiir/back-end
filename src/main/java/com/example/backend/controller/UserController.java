@@ -46,4 +46,13 @@ public class UserController {
         System.out.println(users);
         return ResultInfoUtils.success(users);
     }
+
+    @PassToken
+    @GetMapping("/getTeacher")
+    public ResultInfo getTeacher() {
+        List<User> user = userService.selectAllTeachers();
+        return ResultInfoUtils.success(user);
+    }
+
+
 }

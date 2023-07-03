@@ -1,5 +1,6 @@
 package com.example.backend.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.backend.entity.InviteCode;
 import com.example.backend.entity.User;
 import com.example.backend.exception.OSException;
@@ -124,4 +125,15 @@ public class UserServiceImpl implements UserService {
     public List<User> selectAllUsers() {
         return userMapper.selectList(null);
     }
+
+    @Override
+    public List<User> selectAllTeachers() {
+        QueryWrapper qw = new QueryWrapper();
+        qw.eq("type", 2);
+        return userMapper.selectList(qw);
+    }
+
+
+
+
 }
