@@ -8,9 +8,12 @@ import com.example.backend.exception.OSExceptionEnum;
 import com.example.backend.mapper.InviteCodeMapper;
 import com.example.backend.mapper.UserMapper;
 import com.example.backend.service.UserService;
+import com.example.backend.utils.FileUtils;
 import com.example.backend.utils.JWTUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
 import java.util.List;
@@ -23,6 +26,9 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
     @Autowired
     private InviteCodeMapper inviteCodeMapper;
+
+    @Value("${file.realPath}")
+    private String realPath;
 
     /**
      * 登录业务
@@ -82,7 +88,7 @@ public class UserServiceImpl implements UserService {
                 throw new OSException(OSExceptionEnum.PARAM_ERROR);
             }
             // 判断邀请码合法性
-            if (user.getType() == 1 && !validInviteCode(inviteCode)) {
+            if (user.getType() == 2 && !validInviteCode(inviteCode)) {
                 throw new OSException(OSExceptionEnum.INVITE_CODE_ERROR);
             }
             // 判断密码合法性
@@ -124,6 +130,31 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> selectAllUsers() {
         return userMapper.selectList(null);
+    }
+
+    @Override
+    public int updateUser(User user) {
+        return userMapper.updateById(user);
+    }
+
+    @Override
+    public String uploadImg(MultipartFile img) {
+        if (img == null) {
+            throw new OSException(OSExceptionEnum.FILE_UPLOAD_ERROR);
+        }
+
+        String fileSuffix = img.getOriginalFilename().substring(img.getOriginalFilename().lastIndexOf("."));
+        if (! (fileSuffix.equals(".png") || fileSuffix.equals(".jpg"))) {
+            throw new OSException(OSExceptionEnum.FILE_TYPE_ERROR);
+        }
+
+        String url = FileUtils.saveFile(img);
+
+        if (url == null && url.equals("")) {
+            throw new OSException(OSExceptionEnum.FILE_SAVE_ERROR);
+        }
+
+        return url;
     }
 
     @Override

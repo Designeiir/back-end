@@ -21,6 +21,8 @@ class BackEndApplicationTests {
     private QuestionMapper questionMapper;
     @Autowired
     private StuCourseMapper stuCourseMapper;
+    @Autowired
+    private UserMapper userMapper;
 
     @Test
     void contextLoads() {
@@ -55,5 +57,14 @@ class BackEndApplicationTests {
         System.out.println(course.getStartTime());
         System.out.println(course.getDescription());
     }
+
+    @Test
+    void testPage() {
+        for (User user : userMapper.selectAllByPage(0, 2)) {
+            System.out.println(user);
+        }
+
+    }
+
 
 }
