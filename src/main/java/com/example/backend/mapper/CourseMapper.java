@@ -21,8 +21,12 @@ public interface CourseMapper extends BaseMapper<Course> {
 
 
     //按照学生id查询课表
-    @Select("select * from course where cid in (select cid from stu_course where uid = #{id})")
-    List<Course> selectCourseById(int id);
+    @Select("select * from course where cid in (select cid from stu_course where uid = #{sid})")
+    List<Course> selectCourseBySid(int sid);
+
+    //按照老师id查询课程
+    @Select("select * from course where teacher = #{tid}")
+    List<Course> selectCourseByTid(int tid);
 
     //分页查询   "LIMIT #{page.page}, #{page.size}"
     @Select("select * from course where cid in (select cid from stu_course where uid = #{id})"

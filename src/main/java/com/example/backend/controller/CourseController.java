@@ -33,9 +33,16 @@ public class CourseController {
     }
 
     @PassToken
-    @GetMapping("/getCourseById/{id}")
-    public ResultInfo getCourseById(@PathVariable("id")int id){
-        List<Course> course = courseService.selectCourseById(id);
+    @GetMapping("/getCourseBySid/{sid}")
+    public ResultInfo getCourseBySid(@PathVariable("sid")int sid){
+        List<Course> course = courseService.selectCourseBySid(sid);
+        return ResultInfoUtils.success(course);
+    }
+
+    @PassToken
+    @GetMapping("/getCourseByTid/{tid}")
+    public ResultInfo getCourseByTid(@PathVariable("tid")int tid){
+        List<Course> course = courseService.selectCourseByTid(tid);
         return ResultInfoUtils.success(course);
     }
 

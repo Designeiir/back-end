@@ -33,15 +33,19 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public List<Course> selectCourseById(int id) {
-        List<Course> course=courseMapper.selectCourseById(id);
-        return course;
+    public List<Course> selectCourseBySid(int sid) {
+        return courseMapper.selectCourseBySid(sid);
+    }
+
+    @Override
+    public List<Course> selectCourseByTid(int tid) {
+        List<Course> courses = courseMapper.selectCourseByTid(tid);
+        return courses;
     }
 
     @Override
     public Page<Course> test(Page<Course> page, int id) {
-        Page<Course> course = courseMapper.test(page, id);
-        return course;
+        return courseMapper.test(page, id);
     }
 
     @Override
