@@ -8,10 +8,11 @@ import com.example.backend.exception.OSExceptionEnum;
 import com.example.backend.service.TestService;
 import com.example.backend.utils.ResultInfoUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 
 @RestController
 @RequestMapping("/test")
@@ -49,4 +50,6 @@ public class TestController {
     public ResultInfo testGlobalException() {
         throw new OSException(OSExceptionEnum.EMPTY_DATA);
     }
+
+
 }
