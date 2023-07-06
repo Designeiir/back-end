@@ -89,8 +89,14 @@ public class VideoUploadController {
             @RequestParam("cid")int cid
     ){
         return ResultInfoUtils.success(lectureService.getLecture(cid));
+    }
 
-
+    @PassToken
+    @GetMapping("/getChapter")
+    public ResultInfo getChapter(
+            @RequestParam("cid")int cid
+    ){
+        return ResultInfoUtils.success(lectureService.getChapter(cid));
     }
 
 
