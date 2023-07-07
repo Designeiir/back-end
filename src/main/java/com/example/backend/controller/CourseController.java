@@ -21,6 +21,7 @@ import java.util.Map;
 @RequestMapping("/course")
 @CrossOrigin
 public class CourseController {
+
     @Autowired
     private CourseService courseService;
 
@@ -76,6 +77,14 @@ public class CourseController {
         List<Map<String, Object>> courses = courseService.selectCourseRand(num);
         return ResultInfoUtils.success(courses);
     }
+
+    @PassToken
+    @GetMapping("/getCourseRecommend")
+    public  ResultInfo getCourseRecommend(@RequestParam String key) {
+        List<Map<String, Object>> courses = courseService.selectCourseRecommend(key);
+        return ResultInfoUtils.success(courses);
+    }
+
 
     @PassToken
     @GetMapping("getByTidPage")
