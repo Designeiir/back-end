@@ -3,6 +3,10 @@ package com.example.backend.service.impl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.backend.entity.Course;
+import com.example.backend.entity.Question;
+import com.example.backend.entity.User;
+import com.example.backend.exception.OSException;
+import com.example.backend.exception.OSExceptionEnum;
 import com.example.backend.mapper.CourseMapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.backend.entity.Course;
@@ -78,5 +82,26 @@ public class CourseServiceImpl implements CourseService {
             mapList.add(map);
         }
         return mapList;
+    }
+
+    @Override
+    public Page<Course> getByTidPage(int tid, int pageNum, int pageSize) {
+        if (pageNum < 0 || pageSize <= 0) {
+            throw new OSException(OSExceptionEnum.PARAM_ERROR);
+        }
+
+        User user = userMapper.selectById(tid);
+        if (user == null) {
+            throw new OSException(OSExceptionEnum.USER_EMPTY);
+        }
+
+        QueryWrapper<Course> wrapper = new QueryWrapper<>();
+
+        wrapper.eq("teacher", tid);
+        Page<Course> page = new Page<>(pageNum, pageSize);
+        courseMapper.selectPage(page, wrapper);
+        System.out.println(page.getRecords());
+
+        return page;
     }
 }

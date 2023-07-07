@@ -23,4 +23,6 @@ public interface CourseService {
 
     public Map<String, Object> selectCourse(int cid);
     public List<Map<String, Object>> selectCourseRand(int num);
+
+    Page<Course> getByTidPage(int tid, int pageNum, int pageSize);
 }

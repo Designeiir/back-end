@@ -77,4 +77,11 @@ public class CourseController {
         return ResultInfoUtils.success(courses);
     }
 
+    @PassToken
+    @GetMapping("getByTidPage")
+    public ResultInfo getCourseByTidPage(@RequestParam int tid, @RequestParam int page, @RequestParam int size) {
+        Page<Course> result = courseService.getByTidPage(tid, page, size);
+        return ResultInfoUtils.success(result);
+    }
+
 }
