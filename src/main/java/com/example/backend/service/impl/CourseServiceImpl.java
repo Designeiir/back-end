@@ -104,4 +104,15 @@ public class CourseServiceImpl implements CourseService {
 
         return page;
     }
+
+    @Override
+    public void refuseCourse(int id) {
+        courseMapper.refuseCourse(id);
+
+    }
+
+    @Override
+    public void agreeCourse(int id) {
+        courseMapper.agreeCourse(id);
+    }
 }

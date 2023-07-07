@@ -33,4 +33,27 @@ public interface UserMapper extends BaseMapper<User> {
 
     @Update("update user set img = #{url} where uid = #{uid}")
     int updateImgByUid(int uid, String url);
+
+    //模糊查询用户
+    @Select("SELECT *\n" +
+            "FROM user\n" +
+            "WHERE name LIKE CONCAT('%', #{like}, '%')\n" +
+            "   OR uid LIKE CONCAT('%', #{like}, '%')\n" +
+            "   OR phone_number LIKE CONCAT('%', #{like}, '%')\n" +
+            "   OR introduction LIKE CONCAT('%', #{like}, '%')\n" +
+            "LIMIT #{page}, #{size}\n")
+    List<User> getUserBySearch(int page, int size, String like);
+
+    //年龄正序
+    @Select("select * from user order by age limit #{page}, #{size}")
+    List<User> getUserAgeT(int page,int size);
+    //年龄倒序
+    @Select("select * from user order by age desc limit #{page}, #{size} ")
+    List<User> getUserAgeF(int page,int size);
+    //只看老师
+    @Select("select * from user where type = 2 limit #{page}, #{size}")
+    List<User> getTeacher(int page,int size);
+    //只看学生
+    @Select("select * from user where type = 1 limit #{page}, #{size} ")
+    List<User> getStudent(int page,int size);
 }

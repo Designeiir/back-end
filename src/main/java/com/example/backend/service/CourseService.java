@@ -25,4 +25,12 @@ public interface CourseService {
     public List<Map<String, Object>> selectCourseRand(int num);
 
     Page<Course> getByTidPage(int tid, int pageNum, int pageSize);
+     Map<String, Object> selectCourse(int cid);
+     List<Map<String, Object>> selectCourseRand(int num);
+
+     void refuseCourse(int id);
+
+    void agreeCourse(int id);
+
+
 }
