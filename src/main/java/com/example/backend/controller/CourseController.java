@@ -54,6 +54,7 @@ public class CourseController {
     }
 
 
+
     @PassToken
     @GetMapping("/getCourse")
     public ResultInfo getCourse(@RequestParam int cid) {

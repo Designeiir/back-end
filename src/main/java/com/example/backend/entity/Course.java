@@ -21,4 +21,5 @@ public class Course {
     private int status;
     private int studentCount;
     private String image;
+
 }

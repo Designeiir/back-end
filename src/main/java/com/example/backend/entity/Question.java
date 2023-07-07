@@ -10,7 +10,7 @@ public class Question {
 
     @TableId(type = IdType.AUTO)
     private int qid;
-    @TableField()
+    private int tid;
     private String stem;
     private String a;
     private String b;
