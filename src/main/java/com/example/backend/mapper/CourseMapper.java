@@ -95,4 +95,11 @@ public interface CourseMapper extends BaseMapper<Course> {
     //查询课程按时间倒序
     @Select("select * from course where status=0 order by start_time desc LIMIT #{page}, #{size}")
     List<Course> courseTimeF(int page, int size);
+
+    @Update("update course set status = 2 where cid=#{id}")
+    void refuseCourse(int id);
+
+    @Update("update course set status = 0 where cid=#{id}")
+    void agreeCourse(int id);
+
 }

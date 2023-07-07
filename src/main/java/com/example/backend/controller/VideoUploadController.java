@@ -101,6 +101,7 @@ public class VideoUploadController {
         // 根据 courseId 和 fileName 获取文件路径
         String filePath = "E:/desktop/视频存放/" + courseId + "/" + fileName;
 
+
         // URL 编码文件名
         try {
             fileName = URLEncoder.encode(fileName, StandardCharsets.UTF_8.toString());
@@ -121,6 +122,7 @@ public class VideoUploadController {
             // 设置响应头
             HttpHeaders headers = new HttpHeaders();
             headers.setContentDisposition(ContentDisposition.builder("inline").filename(fileName).build());
+            //headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
             headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
 
             // 返回文件内容

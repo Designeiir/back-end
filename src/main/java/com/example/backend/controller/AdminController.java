@@ -5,6 +5,7 @@ import com.example.backend.entity.Course;
 import com.example.backend.entity.ResultInfo;
 import com.example.backend.entity.User;
 import com.example.backend.service.AdminService;
+import com.example.backend.service.CourseService;
 import com.example.backend.utils.ResultInfoUtils;
 import org.apache.xmlbeans.impl.xb.xsdschema.Public;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ import java.util.List;
 public class AdminController {
     @Autowired
     private AdminService adminService;
+    @Autowired
+    private CourseService courseService;
 
 
     @PassToken
@@ -194,6 +197,26 @@ public class AdminController {
     }
 
     //拒绝课程申请
+    @PassToken
+    @PutMapping("/refuseCourse")
+    public ResultInfo refuseCourse(
+            @RequestParam("cid")int id
+    ){
+
+        courseService.refuseCourse(id);
+        return ResultInfoUtils.success();
+    }
+
     //同意课程申请
+    @PassToken
+    @PutMapping("/agreeCourse")
+    public ResultInfo agreeCourse(
+            @RequestParam("cid")int id
+    ){
+
+        courseService.agreeCourse(id);
+        return ResultInfoUtils.success();
+    }
+
 
 }
