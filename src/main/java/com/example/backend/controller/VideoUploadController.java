@@ -108,6 +108,8 @@ public class VideoUploadController {
     public ResponseEntity<Resource> getFile(@RequestParam String courseId, @RequestParam String fileName, @RequestParam String filetype) {
         // 根据 courseId 和 fileName 获取文件路径
         String filePath = "E:/desktop/视频存放/" + courseId + "/" + fileName;
+
+
         // URL 编码文件名
         try {
             fileName = URLEncoder.encode(fileName, StandardCharsets.UTF_8.toString());

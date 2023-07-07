@@ -17,6 +17,12 @@ public interface CourseService {
     //分页查询
     Page<Course> test(Page<Course> page , int id);
 
-    public Map<String, Object> selectCourse(int cid);
-    public List<Map<String, Object>> selectCourseRand(int num);
+     Map<String, Object> selectCourse(int cid);
+     List<Map<String, Object>> selectCourseRand(int num);
+
+     void refuseCourse(int id);
+
+    void agreeCourse(int id);
+
+
 }
