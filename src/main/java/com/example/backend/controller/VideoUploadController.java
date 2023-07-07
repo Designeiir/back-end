@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 
+import java.awt.*;
 import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
@@ -25,6 +26,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 @RestController
+@CrossOrigin
 public class VideoUploadController {
 
     @Autowired
@@ -102,11 +104,10 @@ public class VideoUploadController {
 
     //根据链接返回文件数据
     @PassToken
-    @GetMapping("/uploads/{courseId}/{fileName}")
-    public ResponseEntity<Resource> getFile(@PathVariable String courseId, @PathVariable String fileName) {
+    @GetMapping("/uploads")
+    public ResponseEntity<Resource> getFile(@RequestParam String courseId, @RequestParam String fileName, @RequestParam String filetype) {
         // 根据 courseId 和 fileName 获取文件路径
         String filePath = "E:/desktop/视频存放/" + courseId + "/" + fileName;
-
         // URL 编码文件名
         try {
             fileName = URLEncoder.encode(fileName, StandardCharsets.UTF_8.toString());
@@ -127,7 +128,7 @@ public class VideoUploadController {
             // 设置响应头
             HttpHeaders headers = new HttpHeaders();
             headers.setContentDisposition(ContentDisposition.builder("inline").filename(fileName).build());
-            headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+            headers.set(HttpHeaders.CONTENT_TYPE, filetype);
 
             // 返回文件内容
             return ResponseEntity.ok().headers(headers).body(resource);
