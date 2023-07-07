@@ -14,7 +14,9 @@ public interface CourseService {
      List<Course> selectAllCourseServices();
 
     //按id查询课程
-     List<Course> selectCourseById(int id);
+    List<Course> selectCourseBySid(int sid);
+
+    List<Course> selectCourseByTid(int tid);
 
     //分页查询
     Page<Course> test(Page<Course> page , int id);
