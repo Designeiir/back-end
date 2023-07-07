@@ -75,7 +75,15 @@ public class CourseServiceImpl implements CourseService {
         for (Course course : courses) {
             course.setScore(getScore(key, course));
         }
+        for(int i = 0, len = courses.size(); i < len; i++) {
+            if(courses.get(i).getScore() == 0) {
+                courses.remove(i);
+                len--;
+                i--;
+            }
+        }
         courses = courses.stream().sorted(Comparator.comparing(Course::getScore)).collect(Collectors.toList());
+        Collections.reverse(courses);
         for (Course course : courses) {
             String des = course.getDescription();
             if(des.length() > 30) {
@@ -96,8 +104,10 @@ public class CourseServiceImpl implements CourseService {
 
 
     public double getScore(String key, Course course) {
-
-        return getSimi(key, course.getName()) * 0.65 + getSimi(key, course.getDescription()) * 0.35;
+        if(course.getDescription().length() > 20) {
+            return getSimi(key, course.getName()) * 2 + getSimi(key, course.getDescription().substring(0, 19)) * 1;
+        }
+        return getSimi(key, course.getName()) * 2 + getSimi(key, course.getDescription()) * 1;
     }
 
     public double getSimi(String str1, String str2) {
@@ -143,7 +153,7 @@ public class CourseServiceImpl implements CourseService {
 
 
 
-        double similarity =1 - (float) dif[length1][length2] / Math.max(str1.length(), str2.length());
+        double similarity = 1 - (double) dif[length1][length2] / Math.max(str1.length(), str2.length());
 
         return similarity;
     }
