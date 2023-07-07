@@ -14,4 +14,5 @@ public class Lecture {
     private String url;
     private String name;
     private String description;
+    private String Type;
 }
