@@ -9,4 +9,5 @@ import java.util.Map;
 public interface CourseService {
     public Map<String, Object> selectCourse(int cid);
     public List<Map<String, Object>> selectCourseRand(int num);
+    public List<Map<String, Object>> selectCourseRecommend(String key);
 }

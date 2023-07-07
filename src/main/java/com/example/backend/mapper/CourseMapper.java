@@ -11,8 +11,10 @@ import java.util.List;
 
 @Mapper
 public interface CourseMapper extends BaseMapper<Course> {
-    @Select("SELECT * FROM course  ORDER BY  RAND() LIMIT #{num}")
+    @Select("SELECT * FROM course WHERE status = 0 ORDER BY  RAND() LIMIT #{num}")
     List<Course> selectRand(int num);
 
+    @Select("select * from course where status = 0")
+    List<Course> selectAll();
 
 }

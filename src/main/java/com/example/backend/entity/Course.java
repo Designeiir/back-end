@@ -1,6 +1,7 @@
 package com.example.backend.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,4 +21,8 @@ public class Course {
     private String scoreRule;
     private int status;
     private String image;
+    @TableField(exist = false)
+    private String startTimeStr;
+    @TableField(exist = false)
+    private double score = 0.0;
 }

@@ -22,6 +22,7 @@ public class CourseController {
 
 
 
+
     @PassToken
     @GetMapping("/getCourse")
     public ResultInfo getCourse(@RequestParam int cid) {
@@ -36,5 +37,13 @@ public class CourseController {
         List<Map<String, Object>> courses = courseService.selectCourseRand(num);
         return ResultInfoUtils.success(courses);
     }
+
+    @PassToken
+    @GetMapping("/getCourseRecommend")
+    public  ResultInfo getCourseRecommend(@RequestParam String key) {
+        List<Map<String, Object>> courses = courseService.selectCourseRecommend(key);
+        return ResultInfoUtils.success(courses);
+    }
+
 
 }
