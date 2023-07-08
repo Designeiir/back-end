@@ -4,10 +4,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.backend.entity.Course;
 import com.example.backend.entity.Course;
 import com.example.backend.entity.User;
-import java.util.List;
-import java.util.Map;
 
 import java.util.List;
+import java.util.Map;
 
 public interface CourseService {
     //查询所有课程
@@ -34,4 +33,5 @@ public interface CourseService {
     int updateCourse(Course course);
 
 
+    public List<Map<String, Object>> selectCourseRecommend(String key);
 }
