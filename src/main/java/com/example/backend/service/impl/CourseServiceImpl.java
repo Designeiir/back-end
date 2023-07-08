@@ -115,4 +115,13 @@ public class CourseServiceImpl implements CourseService {
     public void agreeCourse(int id) {
         courseMapper.agreeCourse(id);
     }
+
+    @Override
+    public int updateCourse(Course course) {
+        if (course.getCid() == 0 || courseMapper.selectById(course.getCid()) == null) {
+            throw new OSException(OSExceptionEnum.PARAM_ERROR);
+        }
+        int result = courseMapper.updateById(course);
+        return result;
+    }
 }

@@ -31,5 +31,7 @@ public interface CourseService {
 
     void agreeCourse(int id);
 
+    int updateCourse(Course course);
+
 
 }
