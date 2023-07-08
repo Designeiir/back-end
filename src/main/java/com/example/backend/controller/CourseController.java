@@ -9,6 +9,8 @@ import com.example.backend.annotation.PassToken;
 import com.example.backend.entity.Course;
 import com.example.backend.entity.ResultInfo;
 
+import com.example.backend.exception.OSException;
+import com.example.backend.exception.OSExceptionEnum;
 import com.example.backend.service.CourseService;
 import com.example.backend.utils.ResultInfoUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,6 +93,16 @@ public class CourseController {
     public ResultInfo getCourseByTidPage(@RequestParam int tid, @RequestParam int page, @RequestParam int size) {
         Page<Course> result = courseService.getByTidPage(tid, page, size);
         return ResultInfoUtils.success(result);
+    }
+
+    @PassToken
+    @PostMapping("updateCourse")
+    public ResultInfo updateCourse(@RequestBody Course course) {
+        int result = courseService.updateCourse(course);
+        if (result == 0) {
+            throw new OSException(OSExceptionEnum.DATABASE_ERROR);
+        }
+        return ResultInfoUtils.success();
     }
 
 }

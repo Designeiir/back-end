@@ -244,4 +244,13 @@ public class CourseServiceImpl implements CourseService {
         }
 
     }
+
+    @Override
+    public int updateCourse(Course course) {
+        if (course.getCid() == 0 || courseMapper.selectById(course.getCid()) == null) {
+            throw new OSException(OSExceptionEnum.PARAM_ERROR);
+        }
+        int result = courseMapper.updateById(course);
+        return result;
+    }
 }

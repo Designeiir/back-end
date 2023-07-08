@@ -30,6 +30,8 @@ public interface CourseService {
 
     void agreeCourse(int id);
 
+    int updateCourse(Course course);
+
 
     public List<Map<String, Object>> selectCourseRecommend(String key);
 }
