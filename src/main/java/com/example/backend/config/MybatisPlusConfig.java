@@ -3,32 +3,20 @@ package com.example.backend.config;
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
-import org.springframework.aop.interceptor.PerformanceMonitorInterceptor;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
-/**
- * @author lh
- * @date 2023/6/25
- *
- * MybatisPlus 插件配置
- */
+@Configuration
+@MapperScan("com.example.backend.mapper") //指定扫描目录
 public class MybatisPlusConfig {
-    /**
-     * mybatis-plus SQL执行效率插件【生产环境可以关闭】
-     */
-    @Bean
-    public PerformanceMonitorInterceptor performanceInterceptor() {
-        return new PerformanceMonitorInterceptor();
-    }
 
     @Bean
     public MybatisPlusInterceptor mybatisPlusInterceptor() {
         MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
-        PaginationInnerInterceptor paginationInnerInterceptor = new PaginationInnerInterceptor();
-        paginationInnerInterceptor.setDbType(DbType.MYSQL);
-        paginationInnerInterceptor.setOverflow(true);
-        interceptor.addInnerInterceptor(paginationInnerInterceptor);
+        interceptor.addInnerInterceptor(new PaginationInnerInterceptor(DbType.MYSQL)); //注意使用哪种数据库
         return interceptor;
     }
 
 }
+

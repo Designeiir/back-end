@@ -23,4 +23,8 @@ public class Course {
     @TableField(exist = false)
     private int studentCount;
     private String image;
+    @TableField(exist = false)
+    private String startTimeStr;
+    @TableField(exist = false)
+    private double score = 0.0;
 }

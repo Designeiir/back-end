@@ -9,6 +9,8 @@ import com.example.backend.annotation.PassToken;
 import com.example.backend.entity.Course;
 import com.example.backend.entity.ResultInfo;
 
+import com.example.backend.exception.OSException;
+import com.example.backend.exception.OSExceptionEnum;
 import com.example.backend.service.CourseService;
 import com.example.backend.utils.ResultInfoUtils;
 import org.apache.xmlbeans.impl.xb.xsdschema.Public;
@@ -22,6 +24,7 @@ import java.util.Map;
 @RequestMapping("/course")
 @CrossOrigin
 public class CourseController {
+
     @Autowired
     private CourseService courseService;
 
@@ -62,6 +65,7 @@ public class CourseController {
     }
 
 
+
     @PassToken
     @GetMapping("/getCourse")
     public ResultInfo getCourse(@RequestParam int cid) {
@@ -78,6 +82,29 @@ public class CourseController {
     }
 
 
+    @PassToken
+    @GetMapping("/getCourseRecommend")
+    public  ResultInfo getCourseRecommend(@RequestParam String key) {
+        List<Map<String, Object>> courses = courseService.selectCourseRecommend(key);
+        return ResultInfoUtils.success(courses);
+    }
 
+
+    @PassToken
+    @GetMapping("getByTidPage")
+    public ResultInfo getCourseByTidPage(@RequestParam int tid, @RequestParam int page, @RequestParam int size) {
+        Page<Course> result = courseService.getByTidPage(tid, page, size);
+        return ResultInfoUtils.success(result);
+    }
+
+    @PassToken
+    @PostMapping("updateCourse")
+    public ResultInfo updateCourse(@RequestBody Course course) {
+        int result = courseService.updateCourse(course);
+        if (result == 0) {
+            throw new OSException(OSExceptionEnum.DATABASE_ERROR);
+        }
+        return ResultInfoUtils.success();
+    }
 
 }

@@ -1,6 +1,7 @@
 package com.example.backend.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
@@ -13,4 +14,6 @@ public class ExQue {
     private int eid;
     private int orde;
     private int score;
+    @TableField(exist = false)
+    private Question question;
 }

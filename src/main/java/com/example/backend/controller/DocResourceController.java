@@ -1,23 +1,20 @@
 package com.example.backend.controller;
 import com.example.backend.annotation.PassToken;
 import com.example.backend.entity.ResultInfo;
-import com.example.backend.entity.VideoInfo;
+import com.example.backend.service.ChapterService;
 import com.example.backend.service.LectureService;
 import com.example.backend.utils.ResultInfoUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
 import org.springframework.http.*;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 
-import java.awt.*;
 import java.io.File;
 import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -27,10 +24,13 @@ import java.nio.file.StandardCopyOption;
 
 @RestController
 @CrossOrigin
-public class VideoUploadController {
+public class DocResourceController {
 
     @Autowired
     private LectureService lectureService;
+
+    @Autowired
+    private ChapterService chapterService;
 
     //处理文件，并存链接到数据库
     @PassToken
@@ -84,23 +84,6 @@ public class VideoUploadController {
             return ResultInfoUtils.error(500, "文件上传失败");
         }
     }
-
-    @PassToken
-    @GetMapping("/getLecture")
-    public ResultInfo getLecture(
-            @RequestParam("cid")int cid
-    ){
-        return ResultInfoUtils.success(lectureService.getLecture(cid));
-    }
-
-    @PassToken
-    @GetMapping("/getChapter")
-    public ResultInfo getChapter(
-            @RequestParam("cid")int cid
-    ){
-        return ResultInfoUtils.success(lectureService.getChapter(cid));
-    }
-
 
     //根据链接返回文件数据
     @PassToken
