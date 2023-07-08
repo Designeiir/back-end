@@ -56,4 +56,8 @@ public interface UserMapper extends BaseMapper<User> {
     //只看学生
     @Select("select * from user where type = 1 limit #{page}, #{size} ")
     List<User> getStudent(int page,int size);
+
+    //修改密码
+    @Update("update user set password = #{password} where uid= #{id}")
+    void updatePasswordByUid(int id,String password);
 }

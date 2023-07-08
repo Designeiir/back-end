@@ -4,8 +4,10 @@ import com.example.backend.annotation.PassToken;
 import com.example.backend.entity.Course;
 import com.example.backend.entity.ResultInfo;
 import com.example.backend.entity.User;
+import com.example.backend.mapper.UserMapper;
 import com.example.backend.service.AdminService;
 import com.example.backend.service.CourseService;
+import com.example.backend.service.UserService;
 import com.example.backend.utils.ResultInfoUtils;
 import org.apache.xmlbeans.impl.xb.xsdschema.Public;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,8 @@ public class AdminController {
     private AdminService adminService;
     @Autowired
     private CourseService courseService;
+    @Autowired
+    private UserService userService;
 
 
     @PassToken
@@ -200,7 +204,7 @@ public class AdminController {
     @PassToken
     @PutMapping("/refuseCourse")
     public ResultInfo refuseCourse(
-            @RequestParam("cid")int id
+            @RequestParam("id")int id
     ){
 
         courseService.refuseCourse(id);
@@ -211,11 +215,22 @@ public class AdminController {
     @PassToken
     @PutMapping("/agreeCourse")
     public ResultInfo agreeCourse(
-            @RequestParam("cid")int id
+            @RequestParam("id")int id
     ){
 
         courseService.agreeCourse(id);
         return ResultInfoUtils.success();
+    }
+
+    //修改用户密码
+    @PassToken
+    @PutMapping("/updatePassword")
+    public ResultInfo updatePassWord(
+            @RequestParam("id")int id,
+            @RequestParam("password")String password
+    ){
+        userService.updatePassword(id,password);
+        return ResultInfoUtils.success("修改成功");
     }
 
 
