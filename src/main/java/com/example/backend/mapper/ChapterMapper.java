@@ -19,7 +19,7 @@ public interface ChapterMapper extends BaseMapper<Chapter> {
     @Select("select * from chapter where cid=#{cid} and no=#{no}")
     List<Chapter> selectChapterByCidAndNo(int cid, int no);
 
-    @Delete("delete * from chapter where cid=#{cid} and no=#{no}")
+    @Delete("delete from chapter where cid=#{cid} and no=#{no}")
     boolean deleteChapterByCidAndNo(int cid, int no);
 
     @Insert("insert into chapter(cid,name,no) values (#{cid}, #{name}, #{no})")
