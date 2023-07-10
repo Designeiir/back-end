@@ -3,6 +3,7 @@ package com.example.backend.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.backend.entity.Lecture;
 import com.example.backend.entity.User;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -20,4 +21,12 @@ public interface LectureMapper extends BaseMapper<Lecture> {
     @Select("select * from lecture where cid=#{id}")
     List<Lecture> getLecture(int id);
 
+    @Select("select * from lecture where cid=#{cid} and orde=#{chapter}")
+    List<Lecture> selectLectureByCidAndChapter(int cid, int chapter);
+
+    @Delete("delete from lecture where cid=#{cid} and orde=#{chapter}")
+    boolean deleteLecturesByCidAndChapter(int cid, int chapter);
+
+    @Delete("delete from lecture where lid=#{lid}")
+    boolean deleteLectureByLid(int lid);
 }

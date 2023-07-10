@@ -49,4 +49,8 @@ public class LectureServicelmpl implements LectureService {
         }
         return ret;
     }
+
+    public boolean deleteLectureByLid(int lid) {
+        return lectureMapper.deleteLectureByLid(lid);
+    }
 }

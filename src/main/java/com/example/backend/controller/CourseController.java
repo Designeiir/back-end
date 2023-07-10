@@ -13,6 +13,7 @@ import com.example.backend.exception.OSException;
 import com.example.backend.exception.OSExceptionEnum;
 import com.example.backend.service.CourseService;
 import com.example.backend.utils.ResultInfoUtils;
+import org.apache.xmlbeans.impl.xb.xsdschema.Public;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -79,6 +80,7 @@ public class CourseController {
         List<Map<String, Object>> courses = courseService.selectCourseRand(num);
         return ResultInfoUtils.success(courses);
     }
+
 
     @PassToken
     @GetMapping("/getCourseRecommend")

@@ -164,7 +164,10 @@ public class UserServiceImpl implements UserService {
         return userMapper.selectList(qw);
     }
 
-
+    @Override
+    public void updatePassword(int id, String password) {
+        userMapper.updatePasswordByUid(id,password);
+    }
 
 
 }
