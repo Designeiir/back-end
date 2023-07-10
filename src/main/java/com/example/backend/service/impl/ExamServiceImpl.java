@@ -117,4 +117,39 @@ public class ExamServiceImpl implements ExamService {
         return result;
     }
 
+    @Override
+    public int updateExam(Exam exam) {
+        int result = examMapper.updateById(exam);
+        return result;
+    }
+
+    @Override
+    public void deleteExam(int eid) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("eid", eid);
+        exQueMapper.deleteByMap(map);
+
+        examMapper.deleteById(eid);
+    }
+
+    @Override
+    public void updateQuestions(List<ExQue> questions) {
+        Map<String, Object> deleteMap = new HashMap<>();
+        deleteMap.put("eid", questions.get(0).getEid());
+        exQueMapper.deleteByMap(deleteMap);
+
+        for (ExQue question : questions) {
+            Map<String, Object> map = new HashMap<>();
+            exQueMapper.insert(question);
+        }
+    }
+
+    @Override
+    public void insertExam(Exam exam) {
+        if(exam.getName() == null || exam.getName().equals("") || exam.getDescription() == null || exam.getDescription().equals("")) {
+            throw new OSException(OSExceptionEnum.PARAM_ERROR);
+        }
+        examMapper.insert(exam);
+    }
+
 }

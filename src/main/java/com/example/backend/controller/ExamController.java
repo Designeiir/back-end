@@ -1,6 +1,7 @@
 package com.example.backend.controller;
 
 import com.example.backend.annotation.PassToken;
+import com.example.backend.entity.ExQue;
 import com.example.backend.entity.Exam;
 import com.example.backend.entity.ResultInfo;
 import com.example.backend.entity.StuExQue;
@@ -53,5 +54,38 @@ public class ExamController {
         else {
             return ResultInfoUtils.success();
         }
+    }
+
+    @PostMapping("updateExam")
+    @PassToken
+    public ResultInfo updateExam(@RequestBody Exam exam) {
+        int result = examService.updateExam(exam);
+        if (result == 0) {
+            throw new OSException(OSExceptionEnum.PARAM_ERROR);
+        }
+        else {
+            return ResultInfoUtils.success();
+        }
+    }
+
+    @GetMapping("deleteExam")
+    @PassToken
+    public ResultInfo deleteExam(@RequestParam int eid) {
+        examService.deleteExam(eid);
+        return ResultInfoUtils.success();
+    }
+
+    @PostMapping("updateQuestions")
+    @PassToken
+    public ResultInfo updateQuestions(@RequestBody List<ExQue> questions) {
+        examService.updateQuestions(questions);
+        return ResultInfoUtils.success();
+    }
+
+    @PostMapping("insertExam")
+    @PassToken
+    public ResultInfo insertExam(@RequestBody Exam exam) {
+        examService.insertExam(exam);
+        return ResultInfoUtils.success();
     }
 }
