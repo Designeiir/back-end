@@ -13,4 +13,6 @@ public interface LectureService {
     List<Chapter> getChapter(int cid);
 
     boolean deleteLectureByLid(int lid);
+
+    List<Lecture> selectLectureByCidAndNo(int cid, int chapter);
 }

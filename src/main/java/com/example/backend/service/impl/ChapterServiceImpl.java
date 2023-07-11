@@ -29,11 +29,9 @@ public class ChapterServiceImpl implements ChapterService {
 
     public boolean deleteChapter(int cid, int no) {
         // firstly delete all lectures in this chapter
-        if (!lectureMapper.deleteLecturesByCidAndChapter(cid, no))
-            return false;
+        lectureMapper.deleteLecturesByCidAndChapter(cid, no);
         // then delete this chapter from database
-        if (!chapterMapper.deleteChapterByCidAndNo(cid, no))
-            return false;
+        chapterMapper.deleteChapterByCidAndNo(cid, no);
 
         return true;
     }

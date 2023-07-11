@@ -63,4 +63,13 @@ public class LectureAndChapterController {
     ){
         return ResultInfoUtils.success(lectureService.deleteLectureByLid(lid));
     }
+
+    @PassToken
+    @GetMapping("/getLectureByCidAndNo")
+    public ResultInfo getLectureByCidAndNo(
+            @RequestParam("cid")int cid,
+            @RequestParam("no")int no
+    ){
+        return ResultInfoUtils.success(lectureService.selectLectureByCidAndNo(cid, no));
+    }
 }

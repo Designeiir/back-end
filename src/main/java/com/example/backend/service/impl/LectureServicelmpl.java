@@ -51,6 +51,11 @@ public class LectureServicelmpl implements LectureService {
     }
 
     public boolean deleteLectureByLid(int lid) {
-        return lectureMapper.deleteLectureByLid(lid);
+        lectureMapper.deleteLectureByLid(lid);
+        return true;
+    }
+
+    public List<Lecture> selectLectureByCidAndNo(int cid, int chapter) {
+        return lectureMapper.selectLectureByCidAndChapter(cid, chapter);
     }
 }

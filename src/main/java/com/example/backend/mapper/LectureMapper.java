@@ -25,8 +25,8 @@ public interface LectureMapper extends BaseMapper<Lecture> {
     List<Lecture> selectLectureByCidAndChapter(int cid, int chapter);
 
     @Delete("delete from lecture where cid=#{cid} and orde=#{chapter}")
-    boolean deleteLecturesByCidAndChapter(int cid, int chapter);
+    void deleteLecturesByCidAndChapter(int cid, int chapter);
 
     @Delete("delete from lecture where lid=#{lid}")
-    boolean deleteLectureByLid(int lid);
+    void deleteLectureByLid(int lid);
 }
