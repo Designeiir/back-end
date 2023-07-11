@@ -14,5 +14,7 @@ public interface UserService {
     int updateUser(User user);
     String uploadImg(MultipartFile img);
     public List<User> selectAllTeachers();
+
+    void updatePassword(int id,String password);
 }
 

@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Date;
+
 @SpringBootTest
 class BackEndApplicationTests {
 
@@ -26,6 +28,8 @@ class BackEndApplicationTests {
     private StuCourseMapper stuCourseMapper;
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private StuExamMapper stuExamMapper;
 
     @Test
     void contextLoads() {
@@ -85,9 +89,14 @@ class BackEndApplicationTests {
 
 
     @Test
-    public void Page() {
+    public void testDateMySQL() {
+        StuExam stuExam = new StuExam();
+        stuExam.setUid(1);
+        stuExam.setEid(2);
+        Date date = new Date();
+        stuExam.setEndTime(date);
 
-
+        stuExamMapper.insert(stuExam);
     }
 
 }
