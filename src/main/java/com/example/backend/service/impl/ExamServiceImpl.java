@@ -46,7 +46,7 @@ public class ExamServiceImpl implements ExamService {
     }
 
     @Override
-    public Map<String, Object> getExamQuestions(int eid) {
+    public Map<String, Object> getExamQuestions(int uid, int eid) {
         if (examMapper.selectById(eid) == null) {
             throw new OSException(OSExceptionEnum.PARAM_ERROR);
         }
@@ -56,6 +56,12 @@ public class ExamServiceImpl implements ExamService {
             exQue.setQuestion(question);
         }
         int score = exQueMapper.getExamScore(eid);
+        List<StuExam> se = stuExamMapper.getAllByUidAndEid(uid, eid);
+        for(StuExam iter : se) {
+            if (iter != null && iter.getEndTime() != null) {
+                score = -1;
+            }
+        }
 
         Map<String, Object> map = new HashMap<>();
         map.put("questions", quesitons);
@@ -106,6 +112,12 @@ public class ExamServiceImpl implements ExamService {
         // 判断参数
         if (userMapper.selectById(uid) == null || examMapper.selectById(eid) == null) {
             throw new OSException(OSExceptionEnum.PARAM_ERROR);
+        }
+        List<StuExam> se = stuExamMapper.getAllByUidAndEid(uid, eid);
+        for(StuExam iter : se) {
+            if (iter != null && iter.getEndTime() != null) {
+                throw new OSException(40010, "已经完成考试");
+            }
         }
         StuExam stuExam = new StuExam();
         stuExam.setUid(uid);

@@ -32,8 +32,8 @@ public class ExamController {
 
     @GetMapping("getQuestion")
     @PassToken
-    public ResultInfo getQuestion(@RequestParam int eid) {
-        Map<String, Object> result = examService.getExamQuestions(eid);
+    public ResultInfo getQuestion(@RequestParam int uid, @RequestParam int eid) {
+        Map<String, Object> result = examService.getExamQuestions(uid, eid);
         return ResultInfoUtils.success(result);
     }
 

@@ -68,9 +68,15 @@ public class CourseController {
 
     @PassToken
     @GetMapping("/getCourse")
-    public ResultInfo getCourse(@RequestParam int cid) {
-        Map<String, Object> courses = courseService.selectCourse(cid);
+    public ResultInfo getCourse(@RequestParam int cid, @RequestParam int uid) {
+        Map<Object, Object> courses = courseService.selectCourse(cid, uid);
         return  ResultInfoUtils.success(courses);
+    }
+
+    @PassToken
+    @GetMapping("/joinCourse")
+    public void joinCourse(@RequestParam int cid, @RequestParam int uid) {
+        courseService.joinCourse(cid, uid);
     }
 
 

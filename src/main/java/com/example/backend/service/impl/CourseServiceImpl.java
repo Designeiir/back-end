@@ -2,15 +2,15 @@ package com.example.backend.service.impl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.example.backend.entity.Course;
-import com.example.backend.entity.Question;
-import com.example.backend.entity.User;
+import com.example.backend.entity.*;
 import com.example.backend.exception.OSException;
 import com.example.backend.exception.OSExceptionEnum;
 import com.example.backend.mapper.CourseMapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.backend.entity.Course;
+import com.example.backend.entity.StuCourse;
 import com.example.backend.mapper.CourseMapper;
+import com.example.backend.mapper.StuCourseMapper;
 import com.example.backend.mapper.UserMapper;
 import com.example.backend.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +35,8 @@ public class CourseServiceImpl implements CourseService {
     private CourseMapper courseMapper;
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private StuCourseMapper stuCourseMapper;
 
     @Override
     public List<Course> selectAllCourseServices() {
@@ -58,7 +60,7 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public Map<String, Object> selectCourse(int cid) {
+    public Map<Object, Object> selectCourse(int cid, int uid) {
         /*QueryWrapper qw = new QueryWrapper();
         qw.eq("cid", cid);
         List<Course> cour = courseMapper.selectList(qw);*/
@@ -69,9 +71,17 @@ public class CourseServiceImpl implements CourseService {
 
 
         String name = userMapper.selectById(course.getTeacher()).getName();
-        Map<String, Object> map = new HashMap<>();
+        Map<String, String> info = new HashMap<>();
+        info.put("teacher", name);
+        if (stuCourseMapper.getByUidAndCid(uid, cid) == null) {
+            info.put("join", "unjoined");
+        }
+        else {
+            info.put("join", "joined");
+        }
+        Map<Object, Object> map = new HashMap<>();
         map.put("course", course);
-        map.put("teacher", name);
+        map.put("info", info);
 
         //List<Map<String, Object>> mapList = new ArrayList<>();
         //mapList.add(map);
@@ -100,6 +110,14 @@ public class CourseServiceImpl implements CourseService {
             mapList.add(map);
         }
         return mapList;
+    }
+
+    @Override
+    public void joinCourse(int cid, int uid) {
+        StuCourse stuCourse = new StuCourse();
+        stuCourse.setCid(cid);
+        stuCourse.setUid(uid);
+        stuCourseMapper.insert(stuCourse);
     }
 
 

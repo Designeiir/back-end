@@ -20,7 +20,10 @@ public interface CourseService {
     //分页查询
     Page<Course> test(Page<Course> page , int id);
 
-    public Map<String, Object> selectCourse(int cid);
+    public Map<Object, Object> selectCourse(int cid, int uid);
+
+    public void joinCourse(int cid, int uid);
+
     public List<Map<String, Object>> selectCourseRand(int num);
 
     Page<Course> getByTidPage(int tid, int pageNum, int pageSize);
